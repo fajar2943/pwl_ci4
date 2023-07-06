@@ -29,13 +29,23 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
 
-$routes->get('/pages/keranjang', 'Page::keranjang');
-$routes->get('/produk', 'Produk::index');
-$routes->add('/produk', 'Produk::create');
-$routes->add('/produk/edit/(:any)', 'Produk::edit/$1');
-$routes->get('/produk/delete/(:any)', 'Produk::delete/$1');
+$routes->get('/login', 'AuthController::login');
+$routes->add('/login', 'AuthController::login'); 
+$routes->get('/logout', 'AuthController::logout');
+
+$routes->get('/pages/keranjang', 'Page::keranjang', ['filter' => 'auth']);
+$routes->get('/produk', 'Produk::index', ['filter' => 'auth']);
+$routes->add('/produk', 'Produk::create', ['filter' => 'auth']);
+$routes->add('/produk/edit/(:any)', 'Produk::edit/$1', ['filter' => 'auth']);
+$routes->get('/produk/delete/(:any)', 'Produk::delete/$1', ['filter' => 'auth']);
+
+$routes->get('/keranjang', 'TransaksiController::cart_show', ['filter' => 'auth']);
+$routes->add('/keranjang', 'TransaksiController::cart_add', ['filter' => 'auth']);
+$routes->add('/keranjang/edit', 'TransaksiController::cart_edit', ['filter' => 'auth']);
+$routes->add('/keranjang/delete/(:any)', 'TransaksiController::cart_delete/$1', ['filter' => 'auth']);
+$routes->add('/keranjang/clear', 'TransaksiController::cart_clear', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

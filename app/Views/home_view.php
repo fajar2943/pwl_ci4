@@ -16,6 +16,16 @@
 
 <section class="section">
   <div class="row">
+    <?php
+    if (session()->getFlashData('success')) {
+    ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= session()->getFlashData('success') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    ?>
     <div class="col-lg-12">
 
       <div class="card">
@@ -24,10 +34,18 @@
             <div class="row">
                 <?php foreach($produks as $index=>$produk): ?> 
                 <div class="col-lg-3">
+                  <?= form_open('keranjang') ?>
+                  <?php
+                  echo form_hidden('id', $produk['id']);
+                  echo form_hidden('nama', $produk['nama']);
+                  echo form_hidden('hrg', $produk['hrg']);
+                  echo form_hidden('foto', $produk['foto']);
+                  ?>
                     <div class="card">
                         <div class="card-body">
                             <img src="<?php echo base_url()."img/".$produk['foto'] ?>" alt="..." width="300px">
-                            <h5 class="card-title"><?php echo $produk['nama'] ?><br><?php echo $produk['hrg'] ?></h5>
+                            <h5 class="card-title"><?php echo $produk['nama'] ?><br><?php echo number_to_currency($produk['hrg'], 'IDR') ?></h5>
+                            <button type="submit" class="btn btn-info rounded-pill">Beli</button>
                         </div>
                     </div> 
                 </div>
