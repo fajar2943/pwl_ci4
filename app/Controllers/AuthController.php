@@ -14,6 +14,28 @@ class AuthController extends BaseController
         $this->user = new userModel();
     }
 
+    public function register()
+    {
+        if ($this->request->getPost()) {
+
+            $this->user->insert([
+                'nama' => $this->request->getVar('nama'), 'email' => $this->request->getVar('email'), 'telp' => $this->request->getVar('telp'),
+                'user_role' => 'Customer', 'password' => md5($this->request->getVar('password'))
+            ]); 
+
+            session()->set([
+                'nama' => $this->request->getVar('nama'),
+                'user_role' => 'Customer',
+                'isLoggedIn' => TRUE
+            ]);
+
+            return redirect()->to(base_url('/'));
+
+        } else {
+            return view('register_view');
+        }
+    }
+    
     public function login()
     {
         if ($this->request->getPost()) {
@@ -23,7 +45,7 @@ class AuthController extends BaseController
             $dataUser = $this->user->where(['nama' => $nama])->first();
 
             if ($dataUser) {
-                if (md5($password) == $dataUser['password']) {
+                if (md5($password) == $dataUser['password'] && $dataUser['is_active']) {
                     session()->set([
                         'nama' => $dataUser['nama'],
                         'user_role' => $dataUser['user_role'],

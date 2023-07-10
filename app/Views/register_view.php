@@ -6,6 +6,16 @@ $nama = [
     'id' => 'nama',
     'class' => 'form-control'
 ];
+$email = [
+    'name' => 'email',
+    'id' => 'email',
+    'class' => 'form-control'
+];
+$telp = [
+    'name' => 'telp',
+    'id' => 'telp',
+    'class' => 'form-control'
+];
 
 $password = [
     'name' => 'password',
@@ -31,8 +41,8 @@ $password = [
                     <div class="card-body">
 
                         <div class="pt-4 pb-2">
-                            <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                            <p class="text-center small">Enter your nama & password to login</p>
+                            <h5 class="card-title text-center pb-0 fs-4">Register</h5>
+                            <p class="text-center small">Daftar Akun</p>
                         </div>
 
                         <?php
@@ -46,13 +56,29 @@ $password = [
                         <?php
                         }
                         ?>
-                        <?= form_open('login', 'class = "row g-3 needs-validation"') ?>
+                        <?= form_open('register', 'class = "row g-3 needs-validation"') ?>
                         <div class="col-12">
                             <label for="yourUsername" class="form-label">Username</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                 <?= form_input($nama) ?>
                                 <div class="invalid-feedback">Please enter your nama.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label for="yourEmail" class="form-label">Email</label>
+                            <div class="input-group has-validation">
+                                <?= form_input($email) ?>
+                                <div class="invalid-feedback">Please enter your email.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="yourTelp" class="form-label">Telp</label>
+                            <div class="input-group has-validation">
+                                <?= form_input($telp) ?>
+                                <div class="invalid-feedback">Please enter your telp.</div>
                             </div>
                         </div>
 
@@ -62,7 +88,7 @@ $password = [
                             <div class="invalid-feedback">Please enter your password!</div>
                         </div>
                         <div class="col-12">
-                            <?= form_submit('submit', 'Login', ['class' => 'btn btn-primary w-100']) ?>
+                            <?= form_submit('submit', 'Register', ['class' => 'btn btn-primary w-100']) ?>
                         </div>
                         <?= form_close() ?>
 
@@ -74,7 +100,7 @@ $password = [
                     <!-- You can delete the links only if you purchased the pro version. -->
                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
                     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                    Belum Punya Akun? <a href="<?php echo base_url()?>register">Daftar</a>
+                    <!-- Belum Punya Akun? <a href="<?php echo base_url()?>register">Daftar</a> -->
                 </div>
 
             </div>
